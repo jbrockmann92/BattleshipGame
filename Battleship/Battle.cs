@@ -14,7 +14,6 @@ namespace Battleship
         //Battle should have turns, not Player
 
         List<Ship> ships = new List<Ship>();
-        int turn;
         //Set each value in battlefield to '.' at the moment
         int[,] battlefield = new int[20, 20];
         string verticalOrHorizontal;
@@ -56,17 +55,22 @@ namespace Battleship
             //Not exactly sure how to place the ships the right way
             if (verticalOrHorizontal == "horizontal")
             {
-                Console.WriteLine("Please enter the horizontal line, 1-20, you'd like to place the ship at");
+                Console.WriteLine("Please enter the horizontal and vertical lines, 1-20, you'd like to place the ship at");
                 horizontalChoice = int.Parse(Console.ReadLine());
-                battlefield[0, horizontalChoice] = 1;
+                verticalChoice = int.Parse(Console.ReadLine());
+                battlefield[verticalChoice, horizontalChoice] = 1;
+                battlefield[verticalChoice, horizontalChoice - 1] = 1;
 
-                //Need to set a value of some kind on the x axis
+                //Need to find how to put the length vertically or horizontally along the axis
             }
             else if (verticalOrHorizontal == "vertical")
             {
-                Console.WriteLine("Please enter the vertical line, 1-20, you'd like to place the ship at");
+                Console.WriteLine("Please enter the horizontal and vertical lines, 1-20, you'd like to place the ship at");
+                horizontalChoice = int.Parse(Console.ReadLine());
                 verticalChoice = int.Parse(Console.ReadLine());
-                battlefield[verticalChoice, 0] = 1;
+                battlefield[verticalChoice, horizontalChoice] = 1;
+                battlefield[verticalChoice - 1, horizontalChoice] = 1;
+                //Probably need a loop for the ship.Length to iterate and add to a variable or something. Doesn't work very well right now
             }
         }
     }
