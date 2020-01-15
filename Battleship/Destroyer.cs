@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    class Program
+    class Destroyer : Ship
     {
-        static void Main(string[] args)
-        {
-            Battle battle = new Battle();
-            battle.PlaceShips();
-        }
     }
 }

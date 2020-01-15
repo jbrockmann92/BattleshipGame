@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    class Program
+    class Ship
     {
-        static void Main(string[] args)
-        {
-            Battle battle = new Battle();
-            battle.PlaceShips();
-        }
+        string name;
+        int length;
+
     }
 }
