@@ -11,5 +11,10 @@ namespace Battleship
         string name;
         int length;
 
+        public Ship(string name, int length)
+        {
+            this.name = name;
+            this.length = length;
+        }
     }
 }

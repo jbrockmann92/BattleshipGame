@@ -12,9 +12,8 @@ namespace Battleship
         //Probably place CheckIfHit() here too
         //Clear the console after each turn
         //Battle should have turns, not Player
-        //Write 2D array here as well. Just a variable?
 
-
+        List<Ship> ships = new List<Ship>();
         int turn;
         //Set each value in battlefield to '.' at the moment
         int[,] battlefield = new int[20, 20];
@@ -43,22 +42,25 @@ namespace Battleship
         {
             //WriteLine, then assign that value to either the x or y axis
             Console.WriteLine("Would you like to place your Destroyer vertically or horizontally?");
-            Console.ReadLine();
-
+            verticalOrHorizontal =  Console.ReadLine().ToLower();
         }
 
         public void PlaceShips()
         {
             //Ship.Length function here
             //VerticalOrHorizontal()???
-            //
-            
+            //playerOne.battleship, playerTwo.submarine or something
+            VerticalOrHorizontal();
+
         }
 
         public void CheckIfHit()
         {
             //Check if the location they hit 
+            //if (battlefield.shotPlacement == 0
+            //{
+            //    Console.WriteLine("You missed!");
+            //}
         }
-
     }
 }
