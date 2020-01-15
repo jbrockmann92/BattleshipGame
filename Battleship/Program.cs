@@ -11,8 +11,10 @@ namespace Battleship
         static void Main(string[] args)
         {
             Battle battle = new Battle();
-            battle.CreateBattleField();
+            battle.PrintBattleField();
             battle.VerticalOrHorizontal();
+            battle.PlaceShips();
+            battle.PrintBattleField();
         }
     }
 }

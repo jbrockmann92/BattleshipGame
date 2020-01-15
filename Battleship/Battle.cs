@@ -18,9 +18,11 @@ namespace Battleship
         //Set each value in battlefield to '.' at the moment
         int[,] battlefield = new int[20, 20];
         string verticalOrHorizontal;
+        int verticalChoice;
+        int horizontalChoice;
 
 
-        public void CreateBattleField()
+        public void PrintBattleField()
         {
             //place a series of numbers on the top and letters on the side, or just leave the user to enter [4, 2], etc.?
             int height = 20;
@@ -30,7 +32,7 @@ namespace Battleship
             {
                 for (int y = 0; y < height; y++)
                 {
-                    Console.Write(battlefield[x, y] + " ");
+                    Console.Write(battlefield[x, y] + "  ");
                 }
                 Console.WriteLine();
             }
@@ -51,16 +53,21 @@ namespace Battleship
             //VerticalOrHorizontal()???
             //playerOne.battleship, playerTwo.submarine or something
             VerticalOrHorizontal();
+            //Not exactly sure how to place the ships the right way
+            if (verticalOrHorizontal == "horizontal")
+            {
+                Console.WriteLine("Please enter the horizontal line, 1-20, you'd like to place the ship at");
+                horizontalChoice = int.Parse(Console.ReadLine());
+                battlefield[0, horizontalChoice] = 1;
 
-        }
-
-        public void CheckIfHit()
-        {
-            //Check if the location they hit 
-            //if (battlefield.shotPlacement == 0
-            //{
-            //    Console.WriteLine("You missed!");
-            //}
+                //Need to set a value of some kind on the x axis
+            }
+            else if (verticalOrHorizontal == "vertical")
+            {
+                Console.WriteLine("Please enter the vertical line, 1-20, you'd like to place the ship at");
+                verticalChoice = int.Parse(Console.ReadLine());
+                battlefield[verticalChoice, 0] = 1;
+            }
         }
     }
 }

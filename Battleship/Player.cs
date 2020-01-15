@@ -23,7 +23,24 @@ namespace Battleship
 
         public void Attack()
         {
+            //CheckIfHit();
+            //
 
+        }
+
+        public void CheckIfHit()
+        {
+            //Should be in Battle class?
+            //Check if the location they hit 
+            //if (battlefield.shotPlacement == 0
+            //{
+            //    Console.WriteLine("You missed!");
+            //}
+            //else if (battlefield.shotPlacement == 1)
+            //{
+            //    Console.WriteLine("You have hit!");
+            //    Ship.health--;
+            //}
         }
 
     }
