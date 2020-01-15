@@ -15,6 +15,7 @@ namespace Battleship
             battle.VerticalOrHorizontal();
             battle.PlaceShips();
             battle.PrintBattleField();
+            battle.CheckIfHit();
         }
     }
 }

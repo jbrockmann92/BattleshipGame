@@ -9,10 +9,14 @@ namespace Battleship
     class Player
     {
         //Member Variables (HAS A)
-        string name;
-        int score;
-        int bombXAxis;
-        int bombYAxis;
+        public string name;
+        public int score;
+        public int bombXAxis;
+        public int bombYAxis;
+        string verticalOrHorizontal;
+        int verticalChoice;
+        int horizontalChoice;
+        int[,] battlefield = new int[20, 20];
         Ship destroyer = new Ship("Destroyer", 2);
         Ship submarine = new Ship("Submarine", 3);
         Ship battleship = new Ship("Battleship", 4);
@@ -31,21 +35,39 @@ namespace Battleship
             bombYAxis = int.Parse(Console.ReadLine());
         }
 
-        public void CheckIfHit()
+        public void VerticalOrHorizontal()
         {
-            //Should be in Battle class?
-            //Check if the location they hit 
-            ShootBomb();
-            if (bombYAxis == 0)
-                //Probably won't work. This is calling the previous input, so will never be true. Need to have bombYAxis = whatever the axis is on the actual field
+            //WriteLine, then assign that value to either the x or y axis
+            Console.WriteLine("Would you like to place your Destroyer vertically or horizontally?");
+            verticalOrHorizontal = Console.ReadLine().ToLower();
+        }
+
+        public void PlaceShips()
+        {
+            //Ship.Length function here
+            //VerticalOrHorizontal()???
+            //playerOne.battleship, playerTwo.submarine or something
+            VerticalOrHorizontal();
+            //Not exactly sure how to place the ships the right way
+            if (verticalOrHorizontal == "horizontal")
             {
-                Console.WriteLine("You missed!");
+                Console.WriteLine("Please enter the horizontal and vertical lines, 1-20, you'd like to place the ship at");
+                horizontalChoice = int.Parse(Console.ReadLine());
+                verticalChoice = int.Parse(Console.ReadLine());
+                battlefield[verticalChoice, horizontalChoice] = 1;
+                battlefield[verticalChoice, horizontalChoice - 1] = 1;
+
+                //Need to find how to put the length vertically or horizontally along the axis
             }
-            //else if (battlefield.shotPlacement == 1)
-            //{
-            //    Console.WriteLine("You have hit!");
-            //    Ship.health--;
-            //}
+            else if (verticalOrHorizontal == "vertical")
+            {
+                Console.WriteLine("Please enter the horizontal and vertical lines, 1-20, you'd like to place the ship at");
+                horizontalChoice = int.Parse(Console.ReadLine());
+                verticalChoice = int.Parse(Console.ReadLine());
+                battlefield[verticalChoice, horizontalChoice] = 1;
+                battlefield[verticalChoice - 1, horizontalChoice] = 1;
+                //Probably need a loop for the ship.Length to iterate and add to a variable or something. Doesn't work very well right now
+            }
         }
 
     }
