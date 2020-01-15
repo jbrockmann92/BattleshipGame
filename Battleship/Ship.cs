@@ -8,8 +8,8 @@ namespace Battleship
 {
     class Ship
     {
-        string name;
-        int length;
+        public string name;
+        public int length;
 
         public Ship(string name, int length)
         {
