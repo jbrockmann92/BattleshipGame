@@ -19,13 +19,32 @@ namespace Battleship
 
         public void BeginBattle()
         {
+            playerOne.GetName();
+            playerOne.PlaceShips();
+            Console.WriteLine($"{playerOne.name}, here is your battlefield");
+            playerOne.PrintBattleField();
+            Console.ReadLine();
+            Console.Clear();
+            //battleships are all only two spaces long still. How to make them the right lengths?
+
+            //something like:
+            //if (Player chooses vertical)
+            //    { 
+            //    for (int i = 0; i < Battleship.length; i++)
+            //    {
+            //        (Playerchoice.yaxis -1) = 1
+            //    }
+            //}
+
+            playerTwo.GetName();
+            playerTwo.PlaceShips();
+            Console.WriteLine($"{playerTwo.name}, here is your battlefield");
+            playerTwo.PrintBattleField();
+            Console.ReadLine();
+            Console.Clear();
+
             while (playerOne.score < 15 && playerTwo.score < 15)
             {
-                playerOne.PlaceShips();
-                Console.Clear();
-                playerTwo.PlaceShips();
-                Console.Clear();
-
                 playerOne.ShootBomb();
                 playerOne.CheckIfHit(playerTwo.battlefield);
 

@@ -16,14 +16,18 @@ namespace Battleship
         int verticalChoice;
         int horizontalChoice;
         public int[,] battlefield = new int[20, 20];
-        Ship destroyer;
-        Ship submarine;
-        Ship battleship;
-        Ship aircraftCarrier;
         List<Ship> ships = new List<Ship>() { new Ship("Destroyer", 2), new Ship("Submarine", 3), new Ship("Battleship", 4), new Ship("Aircraft Carrier", 5) };
 
 
-        //Currently running verticalorhorizontal 4 times, then asking where they want it
+        //Working, but I still need to validate input and make sure that it doesn't allow the players to put ships on top of each other.
+        //Would be cool to print off the board after each ship placement so the player has an idea of where they are.
+
+
+        public void GetName()
+        {
+            Console.WriteLine("What's your name?");
+            name = Console.ReadLine();
+        }
 
         public void PlaceShips()
         {
@@ -37,20 +41,31 @@ namespace Battleship
 
                     if (verticalOrHorizontal == "horizontal")
                     {
-                        Console.WriteLine("Please enter the horizontal and vertical lines, 1-20, you'd like to place the ship at");
+                        Console.WriteLine("Please enter the horizontal and vertical coordinates, 1-20, you'd like to place the right tip of the ship at");
                         horizontalChoice = int.Parse(Console.ReadLine());
                         verticalChoice = int.Parse(Console.ReadLine());
                         battlefield[verticalChoice, horizontalChoice] = 1;
-                        battlefield[verticalChoice, horizontalChoice - 1] = 1;
+                        for (int i = 1; i < ship.length; i++)
+                        {
+                            battlefield[verticalChoice, horizontalChoice - 1] = 1;
+                            horizontalChoice--;
+                        }
                     }
+                    //Doesn't quite work with the destroyer. Only one long
+                    //Change so that if the number goes negative ever they have to enter it again. That way it can't go off the edge of the map
+                    //Check also before placing each ship if there's a ship in the way
                     else if (verticalOrHorizontal == "vertical")
                     {
-                        Console.WriteLine("Please enter the horizontal and vertical lines, 1-20, you'd like to place the ship at");
-                        horizontalChoice = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Please enter the horizontal and vertical coordinates, 1-20, you'd like to place the top of the ship at");
+                        horizontalChoice = int.Parse(Console.ReadLine())
                         verticalChoice = int.Parse(Console.ReadLine());
                         battlefield[verticalChoice, horizontalChoice] = 1;
-                        battlefield[verticalChoice - 1, horizontalChoice] = 1;
-                        //Probably need a loop for the ship.Length to iterate and add to a variable or something. Doesn't work very well right now
+
+                        for (int i = 1; i < ship.length; i++)
+                        {
+                            battlefield[verticalChoice - 1, horizontalChoice] = 1;
+                            verticalChoice--;
+                        }
                     }
                     counter++;
                 }
