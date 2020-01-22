@@ -15,6 +15,7 @@ namespace Battleship
 
         Player playerOne = new Player();
         Player playerTwo = new Player();
+        Computer computer = new Computer();
 
 
         public void BeginBattle()
@@ -25,16 +26,6 @@ namespace Battleship
             playerOne.PrintBattleField();
             Console.ReadLine();
             Console.Clear();
-            //battleships are all only two spaces long still. How to make them the right lengths?
-
-            //something like:
-            //if (Player chooses vertical)
-            //    { 
-            //    for (int i = 0; i < Battleship.length; i++)
-            //    {
-            //        (Playerchoice.yaxis -1) = 1
-            //    }
-            //}
 
             playerTwo.GetName();
             playerTwo.PlaceShips();
