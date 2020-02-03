@@ -15,7 +15,7 @@ namespace Battleship
         string verticalOrHorizontal;
         int verticalChoice;
         int horizontalChoice;
-        public int[,] battlefield = new int[20, 20];
+        public char[,] battlefield = new char[20, 20];
         List<Ship> ships = new List<Ship>() { new Ship("Destroyer", 2), new Ship("Submarine", 3), new Ship("Battleship", 4), new Ship("Aircraft Carrier", 5) };
 
 
@@ -29,35 +29,30 @@ namespace Battleship
             name = Console.ReadLine();
         }
 
-        public void PlaceShips()
-        {
-                ShipLocations();
-        }
-
         public void ShootBomb()
         {
-            Console.WriteLine("Where would you like to shoot your bomb? Put the X-Axis first, then the Y-Axis");
+            Console.WriteLine($"{name}, Where would you like to shoot your bomb? Put the X-Axis first, then the Y-Axis");
             bombXAxis = int.Parse(Console.ReadLine());
             bombYAxis = int.Parse(Console.ReadLine());
         }
 
-        public void CheckIfHit(int[,] battlefield)
+        public void CheckIfHit(char[,] battlefield)
         {
             this.battlefield = battlefield;
-            if (battlefield[bombXAxis, bombYAxis] == 0)
+            if (battlefield[bombXAxis, bombYAxis] == 'I')
             {
                 Console.WriteLine("You missed!");
             }
-            else if (battlefield[bombXAxis, bombYAxis] == 1)
+            else if (battlefield[bombXAxis, bombYAxis] == 'O')
             {
                 Console.WriteLine("Hit!");
                 score++;
-                battlefield[bombXAxis, bombYAxis] = 0;
+                battlefield[bombXAxis, bombYAxis] = 'O';
             }
             Console.ReadLine();
         }
 
-        public void ShipLocations()
+        public void PlaceShips()
         {
             foreach (Ship ship in ships)
             {
@@ -81,34 +76,40 @@ namespace Battleship
 
         public void HorizontalShipPlacement(Ship ship)
         {
+            horizontalChoice = 0;
+            verticalChoice = 0;
             Console.WriteLine("Please enter the horizontal and vertical coordinates, 1-20, you'd like to place the right tip of the ship at");
             horizontalChoice = int.Parse(Console.ReadLine());
             verticalChoice = int.Parse(Console.ReadLine());
+            if (battlefield[verticalChoice, horizontalChoice] == 'I')
+            {
+                Console.WriteLine("Sorry, there's already a ship there. Try again!");
+                HorizontalShipPlacement(ship);
+            }
             TestAndPlaceHorizontal(ship);
         }
 
         public void VerticalShipPlacement(Ship ship)
         {
+            horizontalChoice = 0;
+            verticalChoice = 0;
             Console.WriteLine("Please enter the horizontal and vertical coordinates, 1-20, you'd like to place the top of the ship at");
             horizontalChoice = int.Parse(Console.ReadLine());
             verticalChoice = int.Parse(Console.ReadLine());
+            if (battlefield[verticalChoice, horizontalChoice] == 'I')
+            {
+                Console.WriteLine("Sorry, there's already a ship there. Try again!");
+                VerticalShipPlacement(ship);
+            }
             TestAndPlaceVertical(ship);
         }
 
-
-        //The way I write this temporarily might mean that it won't test the first space. We'll see.
-        //Not quite working with Destroyer again. Only doing one space because it decrements before it places the first one
         public void TestAndPlaceHorizontal(Ship ship)
         {
-            if (horizontalChoice == 1)
-            {
-                Console.WriteLine("Sorry, there's already a ship there. Try again!");
-                HorizontalShipPlacement(ship);
-            }
             for (int i = 1; i < ship.length; i++)
             {
-                battlefield[verticalChoice, horizontalChoice] = 1;
-                battlefield[verticalChoice, horizontalChoice - 1] = 1;
+                battlefield[verticalChoice, horizontalChoice] = 'I';
+                battlefield[verticalChoice, horizontalChoice - 1] = 'I';
                 horizontalChoice--;
                 if (horizontalChoice < 1)
                 {
@@ -120,15 +121,15 @@ namespace Battleship
 
         public void TestAndPlaceVertical(Ship ship)
         {
-            if (verticalChoice == 1)
+            if (battlefield[horizontalChoice, verticalChoice] == 'I')
             {
                 Console.WriteLine("Sorry, there's already a ship there. Try again!");
                 VerticalShipPlacement(ship);
             }
             for (int i = 1; i < ship.length; i++)
             {
-                battlefield[verticalChoice, horizontalChoice] = 1;
-                battlefield[verticalChoice - 1, horizontalChoice] = 1;
+                battlefield[verticalChoice, horizontalChoice] = 'I';
+                battlefield[verticalChoice - 1, horizontalChoice] = 'I';
                 verticalChoice++;
                 if (verticalChoice > 20)
                 {
@@ -148,7 +149,7 @@ namespace Battleship
             {
                 for (int y = 0; y < height; y++)
                 {
-                    Console.Write(battlefield[x, y] + "  ");
+                    Console.Write(battlefield[x, y] + "O");
                 }
                 Console.WriteLine();
             }

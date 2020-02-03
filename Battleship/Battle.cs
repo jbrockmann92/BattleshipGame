@@ -13,13 +13,16 @@ namespace Battleship
         //Clear the console after each turn
         //Battle should have turns, not Player
 
-        Player playerOne = new Player();
-        Player playerTwo = new Player();
+        Player playerOne;
+        Player playerTwo;
         Computer computer = new Computer();
 
 
         public void BeginBattle()
         {
+            OneOrTwoPlayer();
+            
+            //Need to re-work this now that I'm not instantiating the players outside of the method
             playerOne.GetName();
             playerOne.PlaceShips();
             Console.WriteLine($"{playerOne.name}, here is your battlefield");
@@ -53,6 +56,22 @@ namespace Battleship
             else if (playerTwo.score > playerOne.score)
             {
                 Console.WriteLine("Player Two wins!");
+            }
+        }
+
+        public void OneOrTwoPlayer()
+        {
+            Console.WriteLine("Would you like to play against a computer or another human? Press 1 to play against a computer and 2 for a human");
+            int oneOrTwoPlayer = int.Parse(Console.ReadLine());
+            if (oneOrTwoPlayer == 1)
+            {
+                playerOne = new Player();
+                playerTwo = new Computer();
+            }
+            else
+            {
+                playerOne = new Player();
+                playerTwo = new Player();
             }
         }
     }
